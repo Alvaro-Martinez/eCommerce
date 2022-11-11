@@ -1,4 +1,4 @@
-package com.javaschool.eCommerce.entities;
+package com.javaschool.eCommerce.model;
 
 public enum Category {
     FOOD,

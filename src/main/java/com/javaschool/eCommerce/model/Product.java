@@ -18,9 +18,8 @@ public class Product {
     private Category category;
     private String description;
     private double price;
+    private int amount;
     private int likes;
-    @OneToMany
-    @JoinColumn(name = "code")
-    private List<Item> items; //Todo: entendería que va la referencia al id del item y no el objeto en sí.
+    private int cartId;
     //private int amountViews;
 }

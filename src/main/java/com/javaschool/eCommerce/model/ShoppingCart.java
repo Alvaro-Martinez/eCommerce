@@ -14,9 +14,10 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private int id;
+    private int customerId;
     private LocalDateTime date;
     @OneToMany
     @JoinColumn(name = "code")
-    private List<Item> itemsProduct;
+    private List<Product> products;
     private int amount;
 }

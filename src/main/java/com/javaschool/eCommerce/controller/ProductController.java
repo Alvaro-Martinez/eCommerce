@@ -19,7 +19,7 @@ public class ProductController {
         System.out.println(code);
     }
 
-    @GetMapping
+    @GetMapping("/save_product")
     ResponseEntity<Product> createProduct(){
         Product product1 = new Product(2, Category.FRUITS_VEGETABLES, "Pears", 50, 20, 1, 1);
         productRepository.save(product1);
@@ -29,9 +29,9 @@ public class ProductController {
         System.out.println(product2.getLikes());
         return new ResponseEntity<>(product2, HttpStatus.OK);
     }
-    @GetMapping
-    ResponseEntity<Product> viewsPerUser(){
-        return null;
-    }
+//    @GetMapping
+//    ResponseEntity<Product> viewsPerUser(){
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 }

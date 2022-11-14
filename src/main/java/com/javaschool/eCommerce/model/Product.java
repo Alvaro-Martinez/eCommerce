@@ -21,5 +21,5 @@ public class Product {
     private int amount;
     private int likes;
     private int cartId;
-    //private int amountViews;
+    private int amountViews;
 }

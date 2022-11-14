@@ -13,16 +13,14 @@ public class ProductController {
     @Autowired
     IProductService iProductService;
 
-    @PostMapping()
+    @PostMapping
     ResponseEntity<Product> createProduct(){
         return new ResponseEntity<>(iProductService.createProduct(), HttpStatus.OK);
     }
-
     @GetMapping("/likes/{code}")
-    void likeByProduct(@PathVariable int code){
-        iProductService.likesByProduct(code);
+    ResponseEntity<Integer> likeByProduct(@PathVariable int code){
+        return new ResponseEntity<>(iProductService.likesByProduct(code), HttpStatus.OK);
     }
-
     @GetMapping("/product_info/{code}")
     ResponseEntity<Product> productInfoById(@PathVariable int code) {
         Product product = iProductService.productInfoById(code);

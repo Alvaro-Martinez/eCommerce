@@ -6,18 +6,12 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-@Entity
-@Table(name = "shopping_cart")
+
 @Data
 public class ShoppingCart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private int id;
     private int customerId;
     private LocalDateTime date;
-    @OneToMany
-    @JoinColumn(name = "code")
     private List<Product> products;
     private int amount;
 }

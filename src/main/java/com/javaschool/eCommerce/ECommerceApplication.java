@@ -13,9 +13,9 @@ public class ECommerceApplication {
 	public static List<Customer> customerList = new ArrayList<>();
 	public static void main(String[] args) {
 		Faker faker = new Faker(new Locale("en-US"));
-		
+
 		for (int i = 0; i < 10; i++) {
-			Product product = new Product(i + 1, Category.FRUITS_VEGETABLES, faker.commerce().productName(), 10, 3, 0, 0);
+			Product product = new Product(i + 1, Category.FRUITS_VEGETABLES, faker.commerce().productName(), 10, 3, 0, Collections.singletonList(new Visit()));
 			products.add(product);
 		}
 

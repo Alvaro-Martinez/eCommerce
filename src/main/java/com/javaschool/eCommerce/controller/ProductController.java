@@ -18,16 +18,16 @@ public class ProductController {
         return new ResponseEntity<>(productService.createProduct(), HttpStatus.OK);
     }
     @GetMapping("/likes/{code}")
-    ResponseEntity<Integer> likeByProduct(@PathVariable int code){
-        return new ResponseEntity<>(productService.likesByProduct(code), HttpStatus.OK);
+    ResponseEntity<Integer> getLikeByProduct(@PathVariable int code){
+        return new ResponseEntity<>(productService.getLikesByProduct(code), HttpStatus.OK);
     }
-    @GetMapping("/product_info/{code}")
-    ResponseEntity<Product> productInfoById(@PathVariable int code) {
-        Product product = productService.productInfoById(code);
+    @GetMapping("/info/{code}")
+    ResponseEntity<Product> getProductInfoById(@PathVariable int code) {
+        Product product = productService.getProductInfoById(code);
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
     //    @GetMapping
-    //    ResponseEntity<Product> viewsPerUser(){
+    //    ResponseEntity<Product> getViewsPerUser(){
     //        return new ResponseEntity<>(views, HttpStatus.OK);
     //    }
 

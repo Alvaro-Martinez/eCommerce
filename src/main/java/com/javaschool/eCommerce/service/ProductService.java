@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
 
     Product createProduct();
-    int likesByProduct(int code);
-    Product productInfoById(int code);
+    int getLikesByProduct(int code);
+    Product getProductInfoById(int code);
     //Product viewsPerUser();
 
 }

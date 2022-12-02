@@ -4,11 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.*;
-
 import java.util.List;
-
-import static javax.persistence.CascadeType.ALL;
 @Data
 @AllArgsConstructor
 public class Customer {

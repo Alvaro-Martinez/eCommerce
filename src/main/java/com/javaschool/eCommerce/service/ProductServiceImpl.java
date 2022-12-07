@@ -15,12 +15,10 @@ import java.util.stream.Stream;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
+    Faker faker = new Faker(new Locale("en-US"));
     @Override
     public Product createProduct() {
-        Faker faker = new Faker(new Locale("en-US"));
-
-        Product product = new Product(1, Category.FRUITS_VEGETABLES, faker.food().fruit(), 10, 3, 5, Collections.singletonList(new Visit()));
+        Product product = new Product(1, new Category(faker.commerce().department()), faker.food().fruit(), 10, 3, 5, Collections.singletonList(new Visit()));
         product.setLikes(product.getLikes() + 2);
         System.out.println(product.getLikes());
         return product;
@@ -28,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int getLikesByProduct(int code) {
-        Product product = new Product(1, Category.FRUITS_VEGETABLES, "apple", 10, 3, 5, Collections.singletonList(new Visit()));
+        Product product = new Product(1, new Category(faker.commerce().department()), "apple", 10, 3, 5, Collections.singletonList(new Visit()));
         return product.getLikes();
     }
 

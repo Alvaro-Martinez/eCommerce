@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Visit {
 
-    int amountViews;
     int customerId;
+    int amountViews;
     Date viewDate;
 }

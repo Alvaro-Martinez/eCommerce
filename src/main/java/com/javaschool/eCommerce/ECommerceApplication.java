@@ -2,6 +2,7 @@ package com.javaschool.eCommerce;
 
 import com.github.javafaker.Faker;
 import com.javaschool.eCommerce.model.*;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,6 +13,19 @@ import java.util.*;
 public class ECommerceApplication {
 	public static List<Customer> customerList = new ArrayList<>();
 	public static List<Product> products = new ArrayList<>();
+
+	static Category vegetable = new Category("vegetable");
+	static Category meat = new Category("meat");
+	static Category dairy = new Category("dairy");
+	static Category beverage = new Category("beverage");
+	static Category frozen = new Category("frozen");
+
+	public static Category[] categories = {vegetable, meat, dairy, beverage, frozen};
+
+	public static Random rand = new Random();
+	public static Category getRndCategory(){
+		return categories[rand.nextInt(categories.length)];
+	}
 	public static void main(String[] args) {
 		Faker faker = new Faker(new Locale("en-US"));
 
@@ -21,16 +35,14 @@ public class ECommerceApplication {
 
 			customerList.add(customer);
 		}
-		Random rand = new Random();
 
 		for (int i = 0; i < 10; i++) {
-			Product product = new Product(i + 1, new Category(faker.commerce().department()), faker.commerce().productName(),
+			Product product = new Product(i + 1, getRndCategory(), faker.commerce().productName(),
 					rand.nextDouble(), rand.nextInt(), rand.nextInt(),
 					Collections.singletonList(new Visit(1, rand.nextInt(), Date.from(Instant.now()))));
+
 			products.add(product);
 		}
-
-
 
 		SpringApplication.run(ECommerceApplication.class, args);
 	}

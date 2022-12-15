@@ -1,11 +1,12 @@
 package com.javaschool.eCommerce.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class Product {
     private int code;
     private Category category;  //Todo: a nivel de DB como modelo
@@ -13,7 +14,6 @@ public class Product {
     private double price;
     private int stock;
     private int likes;
-    private List<Visit> amountViews;
 
     Double getPriceWithDiscount(double amountDiscount){
         return 1.0;

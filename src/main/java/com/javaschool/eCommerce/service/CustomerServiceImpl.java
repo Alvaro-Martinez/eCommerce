@@ -9,7 +9,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Map<String, Integer> topTenCustomerByProduct(int productId){
     // return products.stream()
-    //Todo: filtar, flatmap, sorted, etc
+    //Todo: filtar, flatmap, sorted, etc , crear un void createCustomer(Customer customer) (lo agrega a la lista)
     //.sorted(Comparator.comparing(Visit::getamountViews)).collect(Collectors.toList());
         return null;
      }

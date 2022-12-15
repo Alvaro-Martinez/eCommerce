@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
 
-    Product createProduct();
+    Product createProduct(Product product);
     int getLikesByProduct(int code);
-    Product getProductInfoById(int code);
+    Product getProductInfoById(int code, int customerId) throws Exception;
     //Product viewsPerUser();
 
 }

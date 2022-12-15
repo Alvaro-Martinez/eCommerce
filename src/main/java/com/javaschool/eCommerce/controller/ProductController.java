@@ -13,18 +13,18 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping
-    ResponseEntity<Product> createProduct(){
-        return new ResponseEntity<>(productService.createProduct(), HttpStatus.OK);
+    @PostMapping
+    ResponseEntity<Product> createProduct(@RequestBody Product product ){
+        return ResponseEntity.ok(productService.createProduct(product)); //Todo: investigar con .create()
     }
     @GetMapping("/likes/{code}")
     ResponseEntity<Integer> getLikeByProduct(@PathVariable int code){
         return new ResponseEntity<>(productService.getLikesByProduct(code), HttpStatus.OK);
     }
     @GetMapping("/info/{code}")
-    ResponseEntity<Product> getProductInfoById(@PathVariable int code) {
-        Product product = productService.getProductInfoById(code);
-        return new ResponseEntity<Product>(product, HttpStatus.OK);
+    ResponseEntity<Product> getProductInfoById(@PathVariable int code, @RequestHeader("customer-id") int customerId) throws Exception {
+        Product product = productService.getProductInfoById(code, customerId);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
     //    @GetMapping
     //    ResponseEntity<Product> getViewsPerUser(){

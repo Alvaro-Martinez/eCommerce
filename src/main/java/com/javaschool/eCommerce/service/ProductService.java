@@ -8,6 +8,8 @@ public interface ProductService {
 
     Product createProduct(Product product);
     int getLikesByProduct(int code);
+
+    void updateLikesByProduct(int code);
     Product getProductInfoById(int code, int customerId) throws Exception;
     //Product viewsPerUser();
 

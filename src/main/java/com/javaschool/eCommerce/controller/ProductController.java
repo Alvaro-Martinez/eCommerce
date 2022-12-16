@@ -26,9 +26,10 @@ public class ProductController {
         Product product = productService.getProductInfoById(code, customerId);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-    //    @GetMapping
-    //    ResponseEntity<Product> getViewsPerUser(){
-    //        return new ResponseEntity<>(views, HttpStatus.OK);
-    //    }
+
+    @PatchMapping("/like/{code}")
+    void updateLikesByProduct(@PathVariable int code){
+        productService.updateLikesByProduct(code);
+    }
 
 }

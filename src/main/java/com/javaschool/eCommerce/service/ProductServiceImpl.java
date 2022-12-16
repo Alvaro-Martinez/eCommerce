@@ -71,4 +71,14 @@ public class ProductServiceImpl implements ProductService {
     static void updateViewsIfNotExist(Visit visit){
         ECommerceApplication.visits.add(visit);
     }
+
+    @Override
+    public void updateLikesByProduct(int code) {
+        Product product = ECommerceApplication.products.stream()
+                .filter(p -> p.getCode() == code)
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("Product not found"));
+
+        product.setLikes(product.getLikes() + 1);
+    }
 }

@@ -2,7 +2,6 @@ package com.javaschool.eCommerce.service;
 
 import com.github.javafaker.Faker;
 import com.javaschool.eCommerce.ECommerceApplication;
-import com.javaschool.eCommerce.model.Category;
 import com.javaschool.eCommerce.model.Customer;
 import com.javaschool.eCommerce.model.Product;
 import com.javaschool.eCommerce.model.Visit;
@@ -13,7 +12,6 @@ import java.util.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    Faker faker = new Faker(new Locale("en-US"));
     @Override
     public Product createProduct(Product product) { //Todo: convertirlo a Void
         ECommerceApplication.products.add(product);
@@ -21,8 +19,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int getLikesByProduct(int code) {
-        Product product = new Product(1, new Category(faker.commerce().department()), "apple", 10, 3, 5);
+    public int getLikesByProduct(int code) throws Exception {
+        Product product = ECommerceApplication.products.stream().filter(p -> p.getCode() == code)
+                .findFirst()
+                .orElseThrow(() -> new Exception("Producto no encontrado"));
+
         return product.getLikes();
     }
 
@@ -73,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateLikesByProduct(int code) {
+    public void updateLikesByProduct(int code) throws NoSuchElementException{
         Product product = ECommerceApplication.products.stream()
                 .filter(p -> p.getCode() == code)
                 .findFirst()

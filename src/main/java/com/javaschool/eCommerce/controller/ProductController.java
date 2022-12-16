@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -18,7 +20,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.createProduct(product)); //Todo: investigar con .create()
     }
     @GetMapping("/likes/{code}")
-    ResponseEntity<Integer> getLikeByProduct(@PathVariable int code){
+    ResponseEntity<Integer> getLikeByProduct(@PathVariable int code) throws Exception {
         return new ResponseEntity<>(productService.getLikesByProduct(code), HttpStatus.OK);
     }
     @GetMapping("/info/{code}")
@@ -28,7 +30,7 @@ public class ProductController {
     }
 
     @PatchMapping("/like/{code}")
-    void updateLikesByProduct(@PathVariable int code){
+    void updateLikesByProduct(@PathVariable int code) throws NoSuchElementException {
         productService.updateLikesByProduct(code);
     }
 

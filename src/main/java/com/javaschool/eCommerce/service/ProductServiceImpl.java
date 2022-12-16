@@ -49,6 +49,10 @@ public class ProductServiceImpl implements ProductService {
         Visit visit = ECommerceApplication.visits.stream().filter(
                         v -> v.getProduct().equals(product) && v.getCustomer().equals(customer))
                 .findFirst()
+//                .ifPresentOrElse(
+//                    (value) -> {updateViewsIfExist(value)}, //Todo: agregar si No existe la vista.
+//                    ()      -> {method()});
+
                 .orElse(Visit.builder()
                         .customer(customer)
                         .product(product)
@@ -62,7 +66,9 @@ public class ProductServiceImpl implements ProductService {
         dates.add(LocalDateTime.now());
         visit.setDates(dates);
 
-        ECommerceApplication.visits.add(visit); //Todo: hacer un update o un add
+    }
 
+    static void updateViewsIfNotExist(Visit visit){
+        ECommerceApplication.visits.add(visit);
     }
 }

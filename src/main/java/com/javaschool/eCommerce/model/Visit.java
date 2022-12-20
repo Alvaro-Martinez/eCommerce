@@ -16,6 +16,10 @@ public class Visit {
 
     Customer customer;
     Product product;
-    int amount;
+    int amount = 0;
     List<LocalDateTime> dates;
+
+    public void increseVisit(){
+        this.amount ++;
+    }
 }

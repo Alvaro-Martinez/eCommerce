@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 @Service
 public interface ProductService {
 
-    Product createProduct(Product product);
+    void createProduct(Product product);
     int getLikesByProduct(int code) throws Exception;
 
     void updateLikesByProduct(int code) throws NoSuchElementException;

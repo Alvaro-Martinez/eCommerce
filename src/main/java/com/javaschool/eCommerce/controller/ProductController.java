@@ -16,8 +16,9 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping
-    ResponseEntity<Product> createProduct(@RequestBody Product product ){
-        return ResponseEntity.ok(productService.createProduct(product)); //Todo: investigar con .create()
+    ResponseEntity<String> createProduct(@RequestBody Product product ){
+        productService.createProduct(product);
+        return ResponseEntity.ok("Product Created"); //Todo: investigar con .create()
     }
     @GetMapping("/likes/{code}")
     ResponseEntity<Integer> getLikeByProduct(@PathVariable int code) throws Exception {

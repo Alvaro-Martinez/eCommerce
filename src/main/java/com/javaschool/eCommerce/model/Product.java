@@ -9,7 +9,7 @@ import lombok.Data;
 @Builder
 public class Product {
     private int code;
-    private Category category;  //Todo: a nivel de DB como modelo
+    private Category category;
     private String description;
     private double price;
     private int stock;

@@ -24,8 +24,7 @@ public class CustomerServiceImpl implements CustomerService{
         */
         return ECommerceApplication.visits.stream()
                 .filter(v -> v.getProduct().getCode() == productId)
-                //.sorted(Comparator.comparingInt(Visit::getAmount))
-                .sorted((v1, v2) -> Integer.compare(v2.getAmount(), v1.getAmount())) //Todo: por se ordena y desordena
+                .sorted(Comparator.comparingInt(Visit::getAmount).reversed())
                 .limit(10)
                 .collect(Collectors.toMap(visit -> visit.getCustomer().getName(), Visit::getAmount, (v1, v2) -> v1, LinkedHashMap::new)); //Todo: investigar implementación del lambda
      }

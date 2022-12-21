@@ -2,9 +2,12 @@ package com.javaschool.eCommerce.service;
 
 import com.javaschool.eCommerce.ECommerceApplication;
 import com.javaschool.eCommerce.model.Customer;
+import com.javaschool.eCommerce.model.Visit;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
@@ -15,9 +18,15 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Map<String, Integer> topTenCustomerByProduct(int productId){
-    // return products.stream()
-    //Todo: filtar, flatmap, sorted, etc , crear un void createCustomer(Customer customer) (lo agrega a la lista)
-    //.sorted(Comparator.comparing(Visit::getamountViews)).collect(Collectors.toList());
-        return null;
+        /*
+          Comparator<Visit> multipleComparator = Comparator.comparing(Visit::getAmount).thenComparing(Comparator.comparing(Visit::getCustomer)));
+            list.stream().sorted(multipleComparator).forEach(System.out::println);
+        */
+        return ECommerceApplication.visits.stream()
+                .filter(v -> v.getProduct().getCode() == productId)
+                //.sorted(Comparator.comparingInt(Visit::getAmount))
+                .sorted((v1, v2) -> Integer.compare(v2.getAmount(), v1.getAmount())) //Todo: por se ordena y desordena
+                .limit(10)
+                .collect(Collectors.toMap(visit -> visit.getCustomer().getName(), Visit::getAmount, (v1, v2) -> v1, LinkedHashMap::new)); //Todo: investigar implementación del lambda
      }
 }

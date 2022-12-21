@@ -14,7 +14,7 @@ import java.util.*;
 @AllArgsConstructor
 @SpringBootApplication
 public class ECommerceApplication {
-	public static List<Customer> customerList = new ArrayList<>(); //Collections.emptyList();
+	public static List<Customer> customerList = new ArrayList<>();
 	public static List<Product> products = new ArrayList<>();
 	public static List<Visit> visits = new ArrayList<>();
 
@@ -27,6 +27,9 @@ public class ECommerceApplication {
 	}
 	public static Customer getRndCustomer(){
 		return customerList.get(rand.nextInt(customerList.size()));
+	}
+	public static Product getRndProduct(){
+		return products.get(rand.nextInt(products.size()));
 	}
 
 	public static void main(String[] args) {

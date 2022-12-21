@@ -15,7 +15,6 @@ public class ProductServiceImpl implements ProductService {
     public void createProduct(Product product) {
         ECommerceApplication.products.add(product);
     }
-
     @Override
     public int getLikesByProduct(int code) throws Exception {
         Product product = ECommerceApplication.products.stream().filter(p -> p.getCode() == code)
@@ -24,45 +23,41 @@ public class ProductServiceImpl implements ProductService {
 
         return product.getLikes();
     }
-
     @Override
     public Product getProductInfoById(int code, int customerId) throws Exception {
         Product productFound = ECommerceApplication.products.stream().filter(product -> product.getCode() == code)
                 .findFirst()
-                .orElseThrow(() -> new Exception("product not found")); //Todo: producto no encontrado
+                .orElseThrow(() -> new Exception("product not found")); //Todo: make custom exception "product not found"
 
             Customer customerFound = ECommerceApplication.customerList.stream().filter(c -> c.getId().equals(customerId))
                     .findFirst()
-                    .orElseThrow(() -> new Exception("Customer not found")); //Todo: Cliente no encontrado
+                    .orElseThrow(() -> new Exception("Customer not found")); //Todo: make custom exception "Client not found"
 
         increaseViews(productFound, customerFound);
 
         return productFound;
     }
-
     static void increaseViews(Product product, Customer customer) {
-        ECommerceApplication.visits.stream().filter(
-                        v -> v.getProduct().equals(product) && v.getCustomer().equals(customer))
+        ECommerceApplication.visits.stream()
+                .filter(v -> v.getProduct().equals(product) && v.getCustomer().equals(customer))
                 .findFirst()
                 .ifPresentOrElse(
-                        ProductServiceImpl::addDateToExistingVisit,
-                        () -> createVisitIfNotExist(product, customer));
+                        ProductServiceImpl::updateVisit,
+                        () -> createVisit(product, customer));
     }
-    static void addDateToExistingVisit(Visit visit){
-        List<LocalDateTime> dates = visit.getDates();
-        dates.add(LocalDateTime.now());
-        visit.increseVisit();
+    static void updateVisit(Visit visit){
+        visit.addDate(LocalDateTime.now());
+        visit.increaseVisit();
     }
-    static void createVisitIfNotExist(Product product, Customer customer){
+    static void createVisit(Product product, Customer customer){
         ECommerceApplication.visits.add(
                 Visit.builder()
                 .amount(1)
                 .product(product)
                 .customer(customer)
-                .dates(List.of(LocalDateTime.now()))  //Collections.singletonList(LocalDateTime.now())
+                .dates(new ArrayList<>(List.of(LocalDateTime.now())))  //Collections.singletonList(LocalDateTime.now())
                 .build());
     }
-
     @Override
     public void updateLikesByProduct(int code) throws NoSuchElementException{
         Product product = ECommerceApplication.products.stream()

@@ -13,13 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Visit {
-
     Customer customer;
     Product product;
-    int amount = 0;
+    int amount;
     List<LocalDateTime> dates;
 
-    public void increseVisit(){
+    public void addDate(LocalDateTime date) {
+        this.dates.add(date);
+    }
+    public void increaseVisit(){
         this.amount ++;
     }
 }
+

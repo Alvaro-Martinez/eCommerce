@@ -22,8 +22,8 @@ public class CustomerController {
         return ResponseEntity.ok("Customer created");
     }
 
-    @GetMapping("/top_ten_by_product/{productId}")
-    ResponseEntity<Map<String, Integer>>getTopTenByProduct(@PathVariable int productId){
-        return new ResponseEntity<>(customerService.topTenCustomerByProduct(productId), HttpStatus.OK);
+    @GetMapping("/top_ten/{productId}")
+    Map<String, Integer>getTopTenByProduct(@PathVariable int productId){
+        return customerService.topTenCustomerByProduct(productId);
     }
 }

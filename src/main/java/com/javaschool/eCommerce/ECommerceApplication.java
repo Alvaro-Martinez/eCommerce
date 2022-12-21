@@ -7,8 +7,11 @@ import com.javaschool.eCommerce.service.CustomerServiceImpl;
 import com.javaschool.eCommerce.service.ProductService;
 import com.javaschool.eCommerce.service.ProductServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
 import java.util.*;
 
 @AllArgsConstructor
@@ -33,43 +36,49 @@ public class ECommerceApplication {
 	}
 
 	public static void main(String[] args) {
-		InitializeData();
-
 		SpringApplication.run(ECommerceApplication.class, args);
 	}
 
-	private static void InitializeData() {
-		Faker faker = new Faker(new Locale("en-US"));
-		CustomerService customerService = new CustomerServiceImpl();
+	@Bean
+	CommandLineRunner commandLineRunner(ProductService productService) {
+		return args ->{
+			Faker faker = new Faker(new Locale("en-US"));
+			CustomerService customerService = new CustomerServiceImpl();
 
-		for (int i = 0; i < 15; i++) {
-			
-			customerService.createCustomer(
-					Customer.builder()
-					.id(i + 1)
-					.name(faker.name().fullName())
-					.phoneNumber(faker.phoneNumber().phoneNumber())
-					.email(faker.internet().emailAddress())
-					.address(List.of(new Address()))
-					.shoppingCart(new ShoppingCart())
-					.build());
-		}
+			for (int i = 0; i < 15; i++) {
 
-		ProductService productService = new ProductServiceImpl();
-		
-		for (int i = 0; i < 10; i++) {
+				customerService.createCustomer(
+						Customer.builder()
+								.id(i + 1)
+								.name(faker.name().fullName())
+								.phoneNumber(faker.phoneNumber().phoneNumber())
+								.email(faker.internet().emailAddress())
+								.address(List.of(new Address()))
+								.shoppingCart(new ShoppingCart())
+								.build());
+			}
 
-			productService.createProduct(
-					Product.builder()
-							.code(i + 1)
-							.category(getRndCategory())
-							.description(faker.commerce().productName())
-							.price(rand.nextDouble())
-							.stock(rand.nextInt())
-							.likes(0)
-							.build()
-			);
-		}
+			//ProductService productService = new ProductServiceImpl();
+
+			for (int i = 0; i < 10; i++) {
+
+				productService.createProduct(
+						Product.builder()
+								.code(i + 1)
+								.category(getRndCategory())
+								.description(faker.commerce().productName())
+								.price(rand.nextDouble())
+								.stock(rand.nextInt())
+								.likes(0)
+								.build()
+				);
+			}
+
+			for (int i = 0; i < 500; i++) {
+				productService.getProductInfoById(getRndProduct().getCode(), getRndCustomer().getId());
+			}
+
+		};
 	}
 
 }

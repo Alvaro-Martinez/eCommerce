@@ -1,6 +1,7 @@
 package com.javaschool.eCommerce.service;
 
 import com.javaschool.eCommerce.model.DTOs.ProductLikesDTO;
+import com.javaschool.eCommerce.model.DTOs.ProductVisitsDTO;
 import com.javaschool.eCommerce.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,6 @@ public interface ProductService {
 
     void updateLikesByProduct(int code) throws NoSuchElementException;
     Product getProductInfoById(int code, int customerId) throws Exception;
-    //Product viewsPerUser();
 
+    List<ProductVisitsDTO> getGlobalProductVisits();
 }

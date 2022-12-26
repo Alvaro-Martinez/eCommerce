@@ -1,6 +1,7 @@
 package com.javaschool.eCommerce.controller;
 
 import com.javaschool.eCommerce.model.DTOs.ProductLikesDTO;
+import com.javaschool.eCommerce.model.DTOs.ProductVisitsDTO;
 import com.javaschool.eCommerce.model.Product;
 import com.javaschool.eCommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class ProductController {
     }
 
     //Todo: cantidad de vistas global de cada producto
+    @GetMapping("/products")
+    List<ProductVisitsDTO> getGlobalProductVisits(){
+        return productService.getGlobalProductVisits();
+    }
 
     @GetMapping("/info/{code}")
     ResponseEntity<Product> getProductInfoById(@PathVariable int code, @RequestHeader("customer-id") int customerId) throws Exception {

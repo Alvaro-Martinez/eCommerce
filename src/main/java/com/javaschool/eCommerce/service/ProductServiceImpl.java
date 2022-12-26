@@ -3,6 +3,7 @@ package com.javaschool.eCommerce.service;
 import com.javaschool.eCommerce.ECommerceApplication;
 import com.javaschool.eCommerce.model.Customer;
 import com.javaschool.eCommerce.model.DTOs.ProductLikesDTO;
+import com.javaschool.eCommerce.model.DTOs.ProductVisitsDTO;
 import com.javaschool.eCommerce.model.Product;
 import com.javaschool.eCommerce.model.Visit;
 import org.springframework.stereotype.Service;
@@ -86,5 +87,24 @@ public class ProductServiceImpl implements ProductService {
         } else {
             throw new NoSuchElementException("Product not found");
         }
+    }
+
+    @Override
+    public List<ProductVisitsDTO> getGlobalProductVisits() {
+
+        List<ProductVisitsDTO> productVisitsDTOList = ECommerceApplication.visits.stream()
+                .sorted(Comparator.comparingInt(Visit::getAmount).reversed())
+                .map(v -> ProductVisitsDTO.builder()
+                        .productName(v.getProduct().getDescription())
+                        .visits(v.getAmount())
+                        .build())
+                .collect(Collectors.toList());
+
+        if (!productVisitsDTOList.isEmpty()){
+            return productVisitsDTOList;
+        } else {
+            throw new NoSuchElementException("Products not found");
+        }
+
     }
 }

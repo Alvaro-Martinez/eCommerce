@@ -1,5 +1,5 @@
 package com.javaschool.eCommerce.model;
 
-public record Category (String name){
+public record Category (Long categoryId, String name){
 
 }

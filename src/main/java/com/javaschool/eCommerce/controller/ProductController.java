@@ -1,5 +1,6 @@
 package com.javaschool.eCommerce.controller;
 
+import com.javaschool.eCommerce.model.DTOs.ProductLikesDTO;
 import com.javaschool.eCommerce.model.Product;
 import com.javaschool.eCommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -24,6 +26,13 @@ public class ProductController {
     ResponseEntity<Integer> getLikeByProduct(@PathVariable int code) throws Exception {
         return new ResponseEntity<>(productService.getLikesByProduct(code), HttpStatus.OK);
     }
+    @GetMapping("/product_likes/{category_id}")
+    List<ProductLikesDTO> getProductLikesByCategory(@PathVariable("category_id") Long categoryId){
+        return productService.getProductLikesByCategory(categoryId);
+    }
+
+    //Todo: cantidad de vistas global de cada producto
+
     @GetMapping("/info/{code}")
     ResponseEntity<Product> getProductInfoById(@PathVariable int code, @RequestHeader("customer-id") int customerId) throws Exception {
         Product product = productService.getProductInfoById(code, customerId);

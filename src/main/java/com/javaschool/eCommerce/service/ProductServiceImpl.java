@@ -2,12 +2,14 @@ package com.javaschool.eCommerce.service;
 
 import com.javaschool.eCommerce.ECommerceApplication;
 import com.javaschool.eCommerce.model.Customer;
+import com.javaschool.eCommerce.model.DTOs.ProductLikesDTO;
 import com.javaschool.eCommerce.model.Product;
 import com.javaschool.eCommerce.model.Visit;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
                 .findFirst()
                 .orElseThrow(() -> new Exception("product not found")); //Todo: make custom exception "product not found"
 
-            Customer customerFound = ECommerceApplication.customerList.stream().filter(c -> c.getId().equals(customerId))
+            Customer customerFound = ECommerceApplication.customers.stream().filter(c -> c.getId().equals(customerId))
                     .findFirst()
                     .orElseThrow(() -> new Exception("Customer not found")); //Todo: make custom exception "Client not found"
 
@@ -66,5 +68,23 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));
 
         product.setLikes(product.getLikes() + 1);
+    }
+
+    @Override
+    public List<ProductLikesDTO> getProductLikesByCategory(Long categoryId) {
+
+        List<ProductLikesDTO> productLikesDTOList = ECommerceApplication.products.stream()
+                .filter(p -> p.getCategory().categoryId().equals(categoryId))
+                .map(p -> ProductLikesDTO.builder()
+                        .productName(p.getDescription())
+                        .likes(p.getLikes())
+                        .build())
+                .collect(Collectors.toList());
+
+        if (!productLikesDTOList.isEmpty()){
+            return productLikesDTOList;
+        } else {
+            throw new NoSuchElementException("Product not found");
+        }
     }
 }

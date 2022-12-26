@@ -5,7 +5,6 @@ import com.javaschool.eCommerce.model.*;
 import com.javaschool.eCommerce.service.CustomerService;
 import com.javaschool.eCommerce.service.CustomerServiceImpl;
 import com.javaschool.eCommerce.service.ProductService;
-import com.javaschool.eCommerce.service.ProductServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,19 +16,19 @@ import java.util.*;
 @AllArgsConstructor
 @SpringBootApplication
 public class ECommerceApplication {
-	public static List<Customer> customerList = new ArrayList<>();
+	public static List<Customer> customers = new ArrayList<>();
 	public static List<Product> products = new ArrayList<>();
 	public static List<Visit> visits = new ArrayList<>();
 
-	public static List<Category> categories = List.of(new Category("vegetable"), new Category("meat"), new Category("dairy"),
-			new Category("beverage"), new Category("frozen"));
+	public static List<Category> categories = Arrays.asList(new Category(1L, "vegetable"), new Category(2L, "meat"),
+			new Category(3L, "dairy"), new Category(4L, "beverage"), new Category(5L, "frozen"));
 
 	public static Random rand = new Random();
 	public static Category getRndCategory(){
 		return categories.get(rand.nextInt(categories.size()));
 	}
 	public static Customer getRndCustomer(){
-		return customerList.get(rand.nextInt(customerList.size()));
+		return customers.get(rand.nextInt(customers.size()));
 	}
 	public static Product getRndProduct(){
 		return products.get(rand.nextInt(products.size()));

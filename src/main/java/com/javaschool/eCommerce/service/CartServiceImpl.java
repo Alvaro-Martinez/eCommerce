@@ -17,7 +17,7 @@ public class CartServiceImpl implements CartService {
     public double getCartTotal() {
         Faker faker = new Faker(new Locale("en-US"));
         Random rand = new Random();
-        Product product = new Product(4, new Category(faker.commerce().department()), faker.commerce().productName(),
+        Product product = new Product(4, new Category(rand.nextLong(), faker.commerce().department()), faker.commerce().productName(),
                 Double.parseDouble(faker.commerce().price()), rand.nextInt(), rand.nextInt());
         List<Product> productList = Collections.singletonList(product);
 

@@ -13,7 +13,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void createCustomer(Customer customer) {
-        ECommerceApplication.customerList.add(customer);
+        ECommerceApplication.customers.add(customer);
     }
 
     @Override
@@ -32,7 +32,5 @@ public class CustomerServiceImpl implements CustomerService{
                         .build())
                 .limit(10)
                 .toList();
-
-
      }
 }

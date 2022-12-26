@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
                 .amount(1)
                 .product(product)
                 .customer(customer)
-                .dates(new ArrayList<>(List.of(LocalDateTime.now())))  //Collections.singletonList(LocalDateTime.now())
+                .dates(new ArrayList<>(List.of(LocalDateTime.now())))
                 .build());
     }
     @Override

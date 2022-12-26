@@ -57,8 +57,6 @@ public class ECommerceApplication {
 								.build());
 			}
 
-			//ProductService productService = new ProductServiceImpl();
-
 			for (int i = 0; i < 10; i++) {
 
 				productService.createProduct(

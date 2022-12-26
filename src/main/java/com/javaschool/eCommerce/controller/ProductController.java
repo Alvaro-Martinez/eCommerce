@@ -21,7 +21,7 @@ public class ProductController {
     @PostMapping
     ResponseEntity<String> createProduct(@RequestBody Product product ){
         productService.createProduct(product);
-        return ResponseEntity.ok("Product Created"); //Todo: investigar con .create()
+        return ResponseEntity.ok("Product Created");
     }
     @GetMapping("/likes/{code}")
     ResponseEntity<Integer> getLikeByProduct(@PathVariable int code) throws Exception {
@@ -31,19 +31,15 @@ public class ProductController {
     List<ProductLikesDTO> getProductLikesByCategory(@PathVariable("category_id") Long categoryId){
         return productService.getProductLikesByCategory(categoryId);
     }
-
-    //Todo: cantidad de vistas global de cada producto
     @GetMapping("/products")
     List<ProductVisitsDTO> getGlobalProductVisits(){
         return productService.getGlobalProductVisits();
     }
-
     @GetMapping("/info/{code}")
     ResponseEntity<Product> getProductInfoById(@PathVariable int code, @RequestHeader("customer-id") int customerId) throws Exception {
         Product product = productService.getProductInfoById(code, customerId);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-
     @PatchMapping("/like/{code}")
     void updateLikesByProduct(@PathVariable int code) throws NoSuchElementException {
         productService.updateLikesByProduct(code);

@@ -1,10 +1,15 @@
 package com.javaschool.eCommerce.service;
 
+import com.javaschool.eCommerce.model.Customer;
+import com.javaschool.eCommerce.model.Ranking;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
+
 
 @Service
 public interface CustomerService {
-    Map<String, Integer> topTenCustomerByProduct(int productId);
+
+    void createCustomer(Customer customer);
+   List<Ranking> topTenCustomerByProduct(int productId);
 }

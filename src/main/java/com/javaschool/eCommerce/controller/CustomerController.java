@@ -1,15 +1,13 @@
 package com.javaschool.eCommerce.controller;
 
+import com.javaschool.eCommerce.model.Customer;
+import com.javaschool.eCommerce.model.Ranking;
 import com.javaschool.eCommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -18,8 +16,14 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("/top_ten_by_product/{productId}")
-    ResponseEntity<Map<String, Integer>>getTopTenByProduct(@PathVariable int productId){
-        return new ResponseEntity<>(customerService.topTenCustomerByProduct(productId), HttpStatus.OK);
+    @PostMapping
+    ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
+        customerService.createCustomer(customer);
+        return ResponseEntity.ok("Customer created");
+    }
+
+    @GetMapping("/top_ten/{productId}")
+    List<Ranking> getTopTenByProduct(@PathVariable int productId){
+        return customerService.topTenCustomerByProduct(productId);
     }
 }
